@@ -1,3 +1,6 @@
+import 'dart:io' show Platform;
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:note_app/db/notes_database.dart';
@@ -41,46 +44,54 @@ class _NotesPageState extends State<NotesPage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
-            'Notes',
+          title: const Text(
+            'یادداشت‌ها',
             style: TextStyle(fontSize: 24),
           ),
-          // actions: [Icon(Icons.search), SizedBox(width: 12)],
+          // actions: [
+          //   IconButton(
+          //     icon: Icon(Icons.search),
+          //     onPressed: () {},
+          //   ),
+          // ],
         ),
         body: Center(
           child: isLoading
-              ? CircularProgressIndicator(
-                  color: Colors.white,
-                )
+              ? Platform.isAndroid
+                  ? const CircularProgressIndicator(
+                      color: Colors.black,
+                    )
+                  : const CupertinoActivityIndicator()
               : notes.isEmpty
-                  ? Text(
-                      'No Notes :-)',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+                  ? const Center(
+                      child: Text(
+                        'یادداشتی وجود ندارد!',
+                        style: TextStyle(fontSize: 22),
+                      ),
                     )
                   : buildNotes(),
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.white,
+          onPressed: () async {
+            await Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const AddEditNotePage()),
+            );
+
+            refreshNotes();
+          },
           child: Icon(
             Icons.create_outlined,
             size: 30,
             color: Colors.grey[900],
           ),
-          onPressed: () async {
-            await Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => AddEditNotePage()),
-            );
-
-            refreshNotes();
-          },
         ),
       );
 
   Widget buildNotes() => StaggeredGridView.countBuilder(
         padding: EdgeInsets.all(8),
         itemCount: notes.length,
-        staggeredTileBuilder: (index) => StaggeredTile.fit(2),
+        staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
         crossAxisCount: 4,
         mainAxisSpacing: 4,
         crossAxisSpacing: 4,

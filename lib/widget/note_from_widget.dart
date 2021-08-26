@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class NoteFormWidget extends StatelessWidget {
   final bool? isImportant;
@@ -23,88 +24,103 @@ class NoteFormWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // TODO: Complete the priority feature!
-              // Text(
-              //   'Is It Important? Set the Priority:',
-              //   style: TextStyle(color: Colors.white, fontSize: 16),
-              // ),
-              Row(
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // TODO: Complete the priority feature!
+            // Text(
+            //   'Is It Important? Set the Priority:',
+            //   style: TextStyle(color: Colors.white, fontSize: 16),
+            // ),
+            Row(
+              children: [
+                // Switch(
+                //   value: isImportant ?? false,
+                //   onChanged: onChangedImportant,
+                //   activeColor: Colors.white,
+                // ),
+                // Expanded(
+                //   child: Slider(
+                //     activeColor: Colors.white,
+                //     inactiveColor: Colors.black54,
+                //     value: (number ?? 0).toDouble(),
+                //     min: 0,
+                //     max: 5,
+                //     divisions: 5,
+                //     onChanged: (number) => onChangedNumber(number.toInt()),
+                //   ),
+                // )
+              ],
+            ),
+            SingleChildScrollView(
+              child: Column(
                 children: [
-                  // Switch(
-                  //   value: isImportant ?? false,
-                  //   onChanged: onChangedImportant,
-                  //   activeColor: Colors.white,
-                  // ),
-                  // Expanded(
-                  //   child: Slider(
-                  //     activeColor: Colors.white,
-                  //     inactiveColor: Colors.black54,
-                  //     value: (number ?? 0).toDouble(),
-                  //     min: 0,
-                  //     max: 5,
-                  //     divisions: 5,
-                  //     onChanged: (number) => onChangedNumber(number.toInt()),
-                  //   ),
-                  // )
+                  buildTitle(),
+                  // const SizedBox(height: 0),
+                  buildDescription(context),
+                  const SizedBox(height: 16),
                 ],
               ),
-              buildTitle(),
-              SizedBox(height: 8),
-              buildDescription(),
-              SizedBox(height: 16),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
-  Widget buildTitle() => TextFormField(
-        maxLines: 1,
-        initialValue: title,
-        maxLength: 50,
-        autofocus: true,
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 26,
-        ),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Title',
-          hintStyle: TextStyle(color: Colors.white70),
-          errorStyle: TextStyle(
-            fontSize: 18.0,
+  Widget buildTitle() => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextFormField(
+          initialValue: title,
+          maxLength: 50,
+          autofocus: true,
+          style: const TextStyle(
+            color: Colors.black,
             fontWeight: FontWeight.bold,
+            fontSize: 26,
           ),
+          decoration: const InputDecoration(
+            border: InputBorder.none,
+            hintText: 'عنوان',
+            hintStyle: TextStyle(color: Colors.black54),
+            errorStyle: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          validator: (title) => title != null && title.isEmpty
+              ? 'عنوان نمی‌تواند خالی باشد!'
+              : null,
+          onChanged: onChangedTitle,
         ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'The title cannot be empty!'
-            : null,
-        onChanged: onChangedTitle,
       );
 
-  Widget buildDescription() => TextFormField(
-        maxLines: 5,
+  Widget buildDescription(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double height = size.height;
+    double witdh = size.width;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: TextFormField(
         initialValue: description,
+        maxLines: 10,
         maxLength: 250,
-        style: TextStyle(color: Colors.white, fontSize: 20),
-        decoration: InputDecoration(
+        style: const TextStyle(color: Colors.black, fontSize: 20),
+        decoration: const InputDecoration(
           border: InputBorder.none,
-          hintText: 'Type something...',
-          hintStyle: TextStyle(color: Colors.white70),
+          hintText: 'توضیحات',
+          hintStyle: TextStyle(color: Colors.black54),
           errorStyle: TextStyle(
-            fontSize: 18.0,
             fontWeight: FontWeight.bold,
+            fontSize: 13,
           ),
         ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'The description cannot be empty!'
-            : null,
         onChanged: onChangedDescription,
-      );
+      ),
+    );
+  }
 }

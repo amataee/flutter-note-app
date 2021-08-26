@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:note_app/page/notes_page.dart';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
@@ -13,25 +16,35 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static final String title = 'Notes SQLite';
+  static const String title = 'Notes SQLite';
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+        localizationsDelegates: const [
+          GlobalCupertinoLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale("fa", "IR"),
+        ],
+        locale: const Locale("fa", "IR"),
         debugShowCheckedModeBanner: false,
         title: title,
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.light,
         theme: ThemeData(
-          // TODO: Change fonts!
-          // fontFamily: 'SourceSansPro',
-          // textTheme: TextTheme(title: TextStyle(fontFamily: 'SourceSansPro')),
-          primaryColor: Colors.black,
-          errorColor: Colors.amber,
-          scaffoldBackgroundColor: Colors.blueGrey.shade700,
-          appBarTheme: AppBarTheme(
+          fontFamily: 'Vazir',
+          // textTheme: TextTheme(title: TextStyle(fontFamily: 'Vazir')),
+          accentColor: Colors.black,
+          primaryColor: Colors.white,
+          errorColor: Colors.red,
+          scaffoldBackgroundColor: Colors.grey[100],
+          appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
-          textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.white),
+          textSelectionTheme:
+              const TextSelectionThemeData(cursorColor: Colors.black45),
         ),
         home: NotesPage(),
       );

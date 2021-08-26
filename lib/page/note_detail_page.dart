@@ -41,32 +41,32 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
           actions: [editButton(), deleteButton()],
         ),
         body: isLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : Padding(
-                padding: EdgeInsets.all(12),
+                padding: EdgeInsets.all(24),
                 child: ListView(
-                  padding: EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   children: [
                     Text(
                       note.title,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 26,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       DateFormat.yMMMd().format(note.createdTime),
-                      style: TextStyle(
-                        color: Colors.white38,
+                      style: const TextStyle(
+                        color: Colors.grey,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 20),
                     Text(
                       note.description,
-                      style: TextStyle(
-                        color: Colors.white70,
+                      style: const TextStyle(
+                        color: Colors.black,
                         fontSize: 18,
                       ),
                     )
@@ -76,7 +76,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
       );
 
   Widget editButton() => IconButton(
-      icon: Icon(Icons.edit_outlined),
+      icon: const Icon(Icons.edit_outlined),
       onPressed: () async {
         if (isLoading) return;
 
@@ -88,11 +88,44 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
       });
 
   Widget deleteButton() => IconButton(
-        icon: Icon(Icons.delete_outline),
+        icon: const Icon(Icons.delete_outline),
         onPressed: () async {
-          await NotesDatabase.instance.delete(widget.noteId);
+          showAlertDialog(BuildContext context) {
+            final Widget cancelButton = TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child:
+                  const Text("لغو", style: TextStyle(color: Colors.black)),
+            );
+            Widget continueButton = TextButton(
+              onPressed: () async {
+                await NotesDatabase.instance.delete(widget.noteId);
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+              child:
+                  const Text("مطمئنم!", style: TextStyle(color: Colors.black)),
+            );
+            AlertDialog alert = AlertDialog(
+              title: const Text("مطمئن هستید؟"),
+              content: const Text("آیا مطمئن هستید که این یادداشت حذف شود؟"),
+              actions: [
+                cancelButton,
+                continueButton,
+              ],
+            );
 
-          Navigator.of(context).pop();
+            // show the dialog
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return alert;
+              },
+            );
+          }
+
+          showAlertDialog(context);
         },
       );
 }
