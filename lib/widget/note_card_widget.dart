@@ -47,27 +47,17 @@ class NoteCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              time,
-              style: TextStyle(
-                color: Colors.grey[800],
-              ),
-            ),
-            const SizedBox(height: 1),
-            Text(
               note.title,
-              style: TextStyle(
-                color: Colors.grey[900],
-                fontSize: 20,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 2),
             Text(
               note.description,
-              maxLines: 3,
-              style: TextStyle(
-                color: Colors.grey[800],
-              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
@@ -78,15 +68,15 @@ class NoteCardWidget extends StatelessWidget {
   double getMinHeight(int index) {
     switch (index % 4) {
       case 0:
-        return 150;
+        return 100;
       case 1:
-        return 150;
+        return 100;
       case 2:
-        return 150;
+        return 100;
       case 3:
-        return 150;
+        return 100;
       default:
-        return 150;
+        return 100;
     }
   }
 }

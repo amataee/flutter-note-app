@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:note_app/db/notes_database.dart';
 import 'package:note_app/model/note.dart';
 import 'package:note_app/page/edit_note_page.dart';
+import 'package:share/share.dart';
 
 class NoteDetailPage extends StatefulWidget {
   final int noteId;
@@ -19,6 +20,7 @@ class NoteDetailPage extends StatefulWidget {
 class _NoteDetailPageState extends State<NoteDetailPage> {
   late Note note;
   bool isLoading = false;
+  late String _value;
 
   @override
   void initState() {
@@ -38,35 +40,34 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          actions: [editButton(), deleteButton()],
+          actions: [editButton(), shareButton(), infoButton(), deleteButton()],
         ),
         body: isLoading
             ? const Center(child: CircularProgressIndicator())
             : Padding(
-                padding: EdgeInsets.all(24),
+                padding: const EdgeInsets.all(24),
                 child: ListView(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   children: [
                     Text(
                       note.title,
                       style: const TextStyle(
-                        color: Colors.black,
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      DateFormat.yMMMd().format(note.createdTime),
-                      style: const TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
+                    // const SizedBox(height: 8),
+                    // Text(
+                    //   DateFormat('h:mm a').format(note.createdTime),
+                    //   // TODO: Add khorshidi cal.
+                    //   // DateTime j2dt = note.createdTime.toDateTime(),
+                    //   // Jalali.fromDateTime(note.createdTime).toString(),
+                    //   // note.createdTime.toJalali().toString(),
+                    // ),
                     const SizedBox(height: 20),
                     Text(
                       note.description,
                       style: const TextStyle(
-                        color: Colors.black,
                         fontSize: 18,
                       ),
                     )
@@ -87,6 +88,105 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
         refreshNote();
       });
 
+  Widget shareButton() => IconButton(
+        icon: const Icon(Icons.share_outlined),
+        onPressed: () {
+          Share.share('${note.title} \n ${note.description}');
+        },
+      );
+
+  Widget infoButton() => IconButton(
+        icon: const Icon(Icons.info_outline),
+        onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                margin: EdgeInsets.fromLTRB(8, 16, 8, 0),
+                height: 250,
+                child: Center(
+                  child: Column(
+                    children: [
+                      Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'ساخته شد',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                DateFormat.yMMMMd()
+                                    .add_jm()
+                                    .format(note.createdTime),
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Text(
+                                'کلمات',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                              const Text(
+                                '!!!',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Text(
+                                'حروف',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                              const Text(
+                                '!!!',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+  // DateFormat('h:mm a').format(note.createdTime),
+
+//   AnimatedIcon(
+//    icon: AnimatedIcons.play_pause,
+//    progress: _animationController,
+//  )
+
   Widget deleteButton() => IconButton(
         icon: const Icon(Icons.delete_outline),
         onPressed: () async {
@@ -95,8 +195,10 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child:
-                  const Text("لغو", style: TextStyle(color: Colors.black)),
+              child: const Text(
+                "لغو",
+                style: TextStyle(color: Colors.black),
+              ),
             );
             Widget continueButton = TextButton(
               onPressed: () async {
@@ -104,19 +206,20 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
-              child:
-                  const Text("مطمئنم!", style: TextStyle(color: Colors.black)),
+              child: const Text(
+                "مطمئنم!",
+                style: TextStyle(color: Colors.black),
+              ),
             );
             AlertDialog alert = AlertDialog(
               title: const Text("مطمئن هستید؟"),
-              content: const Text("آیا مطمئن هستید که این یادداشت حذف شود؟"),
+              content: const Text("آیا مطمئن هستید که این یادداشت حذف بشه؟"),
               actions: [
                 cancelButton,
                 continueButton,
               ],
             );
 
-            // show the dialog
             showDialog(
               context: context,
               builder: (BuildContext context) {

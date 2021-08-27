@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:note_app/page/notes_page.dart';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future main() async {
@@ -35,10 +33,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Vazir',
           // textTheme: TextTheme(title: TextStyle(fontFamily: 'Vazir')),
-          accentColor: Colors.black,
+          accentColor: Colors.teal,
           primaryColor: Colors.white,
           errorColor: Colors.red,
-          scaffoldBackgroundColor: Colors.grey[100],
+          scaffoldBackgroundColor: Colors.grey[200],
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             elevation: 0,

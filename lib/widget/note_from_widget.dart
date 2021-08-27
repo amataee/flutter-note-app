@@ -79,21 +79,19 @@ class NoteFormWidget extends StatelessWidget {
           maxLength: 50,
           autofocus: true,
           style: const TextStyle(
-            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontSize: 26,
           ),
           decoration: const InputDecoration(
             border: InputBorder.none,
             hintText: 'عنوان',
-            hintStyle: TextStyle(color: Colors.black54),
             errorStyle: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.bold,
             ),
           ),
           validator: (title) => title != null && title.isEmpty
-              ? 'عنوان نمی‌تواند خالی باشد!'
+              ? 'عنوان نمی‌تونه خالی باشه!'
               : null,
           onChanged: onChangedTitle,
         ),
@@ -109,11 +107,9 @@ class NoteFormWidget extends StatelessWidget {
         initialValue: description,
         maxLines: 10,
         maxLength: 250,
-        style: const TextStyle(color: Colors.black, fontSize: 20),
         decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: 'توضیحات',
-          hintStyle: TextStyle(color: Colors.black54),
           errorStyle: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 13,

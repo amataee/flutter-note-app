@@ -31,6 +31,10 @@ dependencies:
   intl: ^0.17.0
   flutter_staggered_grid_view: ^0.4.0
   lint: ^1.0.0
+  share: ^2.0.4
+  jalali_calendar: ^1.0.4
+  shamsi_date: ^0.15.0
+  flutter_settings_screens: ^0.2.2+1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -58,7 +62,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
+    - assets/images/drawer_header.png
   # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -78,11 +82,11 @@ flutter:
         - asset: assets/fonts/Vazir/Vazir-Regular-UI.ttf
         - asset: assets/fonts/Vazir/Vazir-Bold-UI.ttf
 #          style: 700
-  #   - family: SourceSansPro
-  #     fonts:
-  #       - asset: assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf
-  #       - asset: assets/fonts/SourceSansPro/SourceSansPro-Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+#   - family: SourceSansPro
+#     fonts:
+#       - asset: assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf
+#       - asset: assets/fonts/SourceSansPro/SourceSansPro-Bold.ttf
+#         weight: 700
+#
+# For details regarding fonts from package dependencies,
+# see https://flutter.dev/custom-fonts/#from-packages
