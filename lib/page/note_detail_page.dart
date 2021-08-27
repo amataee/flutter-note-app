@@ -38,43 +38,46 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          actions: [editButton(), shareButton(), infoButton(), deleteButton()],
-        ),
-        body: isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : Padding(
-                padding: const EdgeInsets.all(24),
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  children: [
-                    Text(
-                      note.title,
-                      style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                      ),
+  Widget build(BuildContext context) {
+    Intl.defaultLocale = 'fa_IR';
+    return Scaffold(
+      appBar: AppBar(
+        actions: [editButton(), shareButton(), infoButton(), deleteButton()],
+      ),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Padding(
+              padding: const EdgeInsets.all(24),
+              child: ListView(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                children: [
+                  Text(
+                    note.title,
+                    style: const TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
                     ),
-                    // const SizedBox(height: 8),
-                    // Text(
-                    //   DateFormat('h:mm a').format(note.createdTime),
-                    //   // TODO: Add khorshidi cal.
-                    //   // DateTime j2dt = note.createdTime.toDateTime(),
-                    //   // Jalali.fromDateTime(note.createdTime).toString(),
-                    //   // note.createdTime.toJalali().toString(),
-                    // ),
-                    const SizedBox(height: 20),
-                    Text(
-                      note.description,
-                      style: const TextStyle(
-                        fontSize: 18,
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                  // const SizedBox(height: 8),
+                  // Text(
+                  //   DateFormat('h:mm a').format(note.createdTime),
+                  //   // TODO: Add khorshidi cal.
+                  //   // DateTime j2dt = note.createdTime.toDateTime(),
+                  //   // Jalali.fromDateTime(note.createdTime).toString(),
+                  //   // note.createdTime.toJalali().toString(),
+                  // ),
+                  const SizedBox(height: 20),
+                  Text(
+                    note.description,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  )
+                ],
               ),
-      );
+            ),
+    );
+  }
 
   Widget editButton() => IconButton(
       icon: const Icon(Icons.edit_outlined),
@@ -119,8 +122,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                                 ),
                               ),
                               Text(
-                                DateFormat.yMMMMd()
-                                    .add_jm()
+                                DateFormat('d MMM، yyyy، HH:mm')
                                     .format(note.createdTime),
                                 style: const TextStyle(
                                   fontSize: 20,

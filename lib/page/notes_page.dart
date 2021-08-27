@@ -228,25 +228,40 @@ class _NotesPageState extends State<NotesPage> {
         ),
       );
 
-  Widget buildNotes() => StaggeredGridView.countBuilder(
-        padding: const EdgeInsets.all(8),
+  Widget buildNotes() => ListView.builder(
+        padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
         itemCount: notes.length,
-        staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
-        crossAxisCount: 4,
-        mainAxisSpacing: 4,
-        crossAxisSpacing: 4,
         itemBuilder: (context, index) {
           final note = notes[index];
 
-          return GestureDetector(
-            onTap: () async {
-              await Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => NoteDetailPage(noteId: note.id!),
-              ));
-
-              refreshNotes();
-            },
-            child: NoteCardWidget(note: note, index: index),
+          return Column(
+            children: [
+              ListTile(
+                onTap: () async {
+                  await Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => NoteDetailPage(noteId: note.id!),
+                  ));
+                  refreshNotes();
+                },
+                onLongPress: () {
+                  // TODO: select notes
+                },
+                title: Text(
+                  note.title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                subtitle: Text(
+                  note.description,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const Divider(
+                thickness: 0.4,
+              ),
+            ],
           );
         },
       );
