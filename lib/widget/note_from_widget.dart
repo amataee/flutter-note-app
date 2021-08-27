@@ -80,7 +80,7 @@ class NoteFormWidget extends StatelessWidget {
           autofocus: true,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 26,
+            fontSize: 22,
           ),
           decoration: const InputDecoration(
             border: InputBorder.none,

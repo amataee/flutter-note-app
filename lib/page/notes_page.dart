@@ -135,7 +135,7 @@ class _NotesPageState extends State<NotesPage> {
           centerTitle: true,
           title: const Text(
             'یادداشت‌ها',
-            style: TextStyle(fontSize: 24),
+            style: TextStyle(fontSize: 20),
           ),
           // actions: [
           //   IconButton(

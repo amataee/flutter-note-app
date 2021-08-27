@@ -4,6 +4,7 @@ import 'package:note_app/db/notes_database.dart';
 import 'package:note_app/model/note.dart';
 import 'package:note_app/page/edit_note_page.dart';
 import 'package:share/share.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 
 class NoteDetailPage extends StatefulWidget {
   final int noteId;
@@ -54,7 +55,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                   Text(
                     note.title,
                     style: const TextStyle(
-                      fontSize: 26,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -69,9 +70,6 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                   const SizedBox(height: 20),
                   Text(
                     note.description,
-                    style: const TextStyle(
-                      fontSize: 18,
-                    ),
                   )
                 ],
               ),
@@ -118,14 +116,14 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                               const Text(
                                 'ساخته شد',
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
                                 DateFormat('d MMM، yyyy، HH:mm')
                                     .format(note.createdTime),
                                 style: const TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   color: Colors.black54,
                                 ),
                               ),
@@ -139,13 +137,16 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                               const Text(
                                 'کلمات',
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                 ),
                               ),
-                              const Text(
-                                '!!!',
-                                style: TextStyle(
-                                  fontSize: 20,
+                              Text(
+                                (note.title.split(' ').length +
+                                        note.description.split(' ').length)
+                                    .toString()
+                                    .toPersianDigit(),
+                                style: const TextStyle(
+                                  fontSize: 18,
                                   color: Colors.black54,
                                 ),
                               ),
@@ -159,13 +160,15 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                               const Text(
                                 'حروف',
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                 ),
                               ),
-                              const Text(
-                                '!!!',
-                                style: TextStyle(
-                                  fontSize: 20,
+                              Text(
+                                (note.title.length + note.description.length)
+                                    .toString()
+                                    .toPersianDigit(),
+                                style: const TextStyle(
+                                  fontSize: 18,
                                   color: Colors.black54,
                                 ),
                               ),
