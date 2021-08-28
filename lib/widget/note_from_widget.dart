@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class NoteFormWidget extends StatelessWidget {
   final bool? isImportant;
@@ -31,31 +30,6 @@ class NoteFormWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // TODO: Complete the priority feature!
-            // Text(
-            //   'Is It Important? Set the Priority:',
-            //   style: TextStyle(color: Colors.white, fontSize: 16),
-            // ),
-            Row(
-              children: [
-                // Switch(
-                //   value: isImportant ?? false,
-                //   onChanged: onChangedImportant,
-                //   activeColor: Colors.white,
-                // ),
-                // Expanded(
-                //   child: Slider(
-                //     activeColor: Colors.white,
-                //     inactiveColor: Colors.black54,
-                //     value: (number ?? 0).toDouble(),
-                //     min: 0,
-                //     max: 5,
-                //     divisions: 5,
-                //     onChanged: (number) => onChangedNumber(number.toInt()),
-                //   ),
-                // )
-              ],
-            ),
             SingleChildScrollView(
               child: Column(
                 children: [

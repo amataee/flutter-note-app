@@ -25,7 +25,6 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   void initState() {
     super.initState();
 
-    isImportant = widget.note?.isImportant ?? false;
     number = widget.note?.number ?? 0;
     title = widget.note?.title ?? '';
     description = widget.note?.description ?? '';
@@ -86,7 +85,6 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
 
   Future updateNote() async {
     final note = widget.note!.copy(
-      isImportant: isImportant,
       number: number,
       title: title,
       description: description,
@@ -98,7 +96,6 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   Future addNote() async {
     final note = Note(
       title: title,
-      isImportant: true,
       number: number,
       description: description,
       createdTime: DateTime.now(),

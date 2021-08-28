@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.light,
         theme: ThemeData(
           fontFamily: 'Vazir',
-          // textTheme: TextTheme(title: TextStyle(fontFamily: 'Vazir')),
           accentColor: Colors.teal,
           primaryColor: Colors.white,
           errorColor: Colors.red,

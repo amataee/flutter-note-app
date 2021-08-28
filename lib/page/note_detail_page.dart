@@ -59,13 +59,6 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  // const SizedBox(height: 8),
-                  // Text(
-                  //   DateFormat('h:mm a').format(note.createdTime),
-                  //   // TODO: Add khorshidi cal.
-                  //   // DateTime j2dt = note.createdTime.toDateTime(),
-                  //   // Jalali.fromDateTime(note.createdTime).toString(),
-                  //   // note.createdTime.toJalali().toString(),
                   // ),
                   const SizedBox(height: 20),
                   Text(
@@ -184,13 +177,6 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
           );
         },
       );
-
-  // DateFormat('h:mm a').format(note.createdTime),
-
-//   AnimatedIcon(
-//    icon: AnimatedIcons.play_pause,
-//    progress: _animationController,
-//  )
 
   Widget deleteButton() => IconButton(
         icon: const Icon(Icons.delete_outline),
