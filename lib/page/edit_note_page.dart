@@ -16,7 +16,6 @@ class AddEditNotePage extends StatefulWidget {
 
 class _AddEditNotePageState extends State<AddEditNotePage> {
   final _formKey = GlobalKey<FormState>();
-  late bool isImportant;
   late int number;
   late String title;
   late String description;
@@ -38,16 +37,14 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
         body: Form(
           key: _formKey,
           child: NoteFormWidget(
-            isImportant: isImportant,
             number: number,
             title: title,
             description: description,
-            onChangedImportant: (isImportant) =>
-                setState(() => this.isImportant = isImportant),
             onChangedNumber: (number) => setState(() => this.number = number),
             onChangedTitle: (title) => setState(() => this.title = title),
             onChangedDescription: (description) =>
                 setState(() => this.description = description),
+            onChangedImportant: (bool value) {},
           ),
         ),
       );

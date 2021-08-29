@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class NoteFormWidget extends StatelessWidget {
-  final bool? isImportant;
   final int? number;
   final String? title;
   final String? description;
@@ -12,7 +11,6 @@ class NoteFormWidget extends StatelessWidget {
 
   const NoteFormWidget({
     Key? key,
-    this.isImportant = false,
     this.number = 0,
     this.title = '',
     this.description = '',
@@ -79,8 +77,7 @@ class NoteFormWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: TextFormField(
         initialValue: description,
-        maxLines: 10,
-        maxLength: 250,
+        maxLines: 15,
         decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: 'توضیحات',
