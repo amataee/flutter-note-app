@@ -19,6 +19,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   late int number;
   late String title;
   late String description;
+  late String isImportant;
 
   @override
   void initState() {
@@ -27,6 +28,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     number = widget.note?.number ?? 0;
     title = widget.note?.title ?? '';
     description = widget.note?.description ?? '';
+    isImportant = widget.note?.isImportant ?? '';
   }
 
   @override
@@ -94,6 +96,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     final note = Note(
       title: title,
       number: number,
+      isImportant: isImportant,
       description: description,
       createdTime: DateTime.now(),
     );
